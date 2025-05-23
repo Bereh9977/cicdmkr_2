@@ -40,3 +40,11 @@ class ImageDetailViewTests(TestCase):
     def test_image_detail_view_status_code(self):
         response = self.client.get(reverse('image_detail', args=[self.image.pk])) 
         self.assertEqual(response.status_code, 200)
+
+    def test_image_detail_view_template_used(self):
+        response = self.client.get(reverse('image_detail', args=[self.image.pk]))
+        self.assertTemplateUsed(response, 'image_detail.html')
+
+    def test_image_detail_view_context_contains_image(self):
+        response = self.client.get(reverse('image_detail', args=[self.image.pk]))
+        self.assertEqual(response.context['image'], self.image)
