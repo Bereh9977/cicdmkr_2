@@ -22,3 +22,7 @@ class GalleryViewTests(TestCase):
     def test_gallery_view_template_used(self):
         response = self.client.get(reverse('main'))
         self.assertTemplateUsed(response, 'gallery.html')
+
+    def test_gallery_view_context_contains_category(self):
+        response = self.client.get(reverse('main'))
+        self.assertIn(self.category, response.context['categories'])
