@@ -26,3 +26,13 @@ class GalleryViewTests(TestCase):
     def test_gallery_view_context_contains_category(self):
         response = self.client.get(reverse('main'))
         self.assertIn(self.category, response.context['categories'])
+
+
+class ImageDetailViewTests(TestCase):
+    def setUp(self):
+        self.image = Image.objects.create(
+            title='Sunset',
+            image=SimpleUploadedFile('sunset.jpg', b'image data', content_type='image/jpeg'),
+            created_date=date.today(),
+            age_limit=0
+        )
