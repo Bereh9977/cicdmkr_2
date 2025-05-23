@@ -36,3 +36,7 @@ class ImageDetailViewTests(TestCase):
             created_date=date.today(),
             age_limit=0
         )
+
+    def test_image_detail_view_status_code(self):
+        response = self.client.get(reverse('image_detail', args=[self.image.pk])) 
+        self.assertEqual(response.status_code, 200)
